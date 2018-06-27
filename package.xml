@@ -4,6 +4,7 @@
   <version>2.2.3</version>
   <description>The pybind11 package</description>
   <maintainer email="v.ivan@ed.ac.uk">Vladimir Ivan</maintainer>
+  <maintainer email="wolfgang.merkt@ed.ac.uk">Wolfgang Merkt</maintaner>
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
