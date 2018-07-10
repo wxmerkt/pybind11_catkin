@@ -5,45 +5,49 @@ find_package(catkin REQUIRED)
 
 include(ExternalProject)
 
-set(PYBIND_SRC ${CMAKE_BINARY_DIR}/pybind11_src)
-
-ExternalProject_Add(
-  pybind11
-  # GIT_REPOSITORY "https://github.com/pybind/pybind11.git"
-  # GIT_TAG "v2.2.3"
+ExternalProject_Add(pybind11
   URL "https://github.com/pybind/pybind11/archive/v2.2.3.zip"
   URL_MD5 "6d9ae6508d0bb0595129dca09ec7738b"
 
   UPDATE_COMMAND ""
   PATCH_COMMAND ""
-
-  SOURCE_DIR "${PYBIND_SRC}"
-  CMAKE_ARGS -DPYBIND11_TEST=No -DPYBIND11_INSTALL=Yes -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX}
-
   TEST_COMMAND ""
-)
 
-ExternalProject_Add_Step(
-  pybind11 MOVEToShared
-  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CATKIN_DEVEL_PREFIX}/share/cmake/pybind11 ${CATKIN_DEVEL_PREFIX}/share/pybind11/cmake
-  COMMAND ${CMAKE_COMMAND} -E copy ${CATKIN_DEVEL_PREFIX}/share/cmake/pybind11/pybind11Tools.cmake ${CATKIN_DEVEL_PREFIX}/share/pybind11_catkin/cmake
-  COMMAND ${CMAKE_COMMAND} -E copy ${CATKIN_DEVEL_PREFIX}/share/cmake/pybind11/FindPythonLibsNew.cmake ${CATKIN_DEVEL_PREFIX}/share/pybind11_catkin/cmake
-  COMMAND ${CMAKE_COMMAND} -E remove_directory ${CATKIN_DEVEL_PREFIX}/share/cmake/
+  CMAKE_ARGS -DPYBIND11_TEST=No -DPYBIND11_INSTALL=Yes -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX}
+)
+ExternalProject_Add_Step(pybind11
+  MOVEToShared
+  COMMENT "Copying CMake extras to install directory."
+  COMMAND ${CMAKE_COMMAND} -E copy ${CATKIN_DEVEL_PREFIX}/share/cmake/pybind11/pybind11Tools.cmake ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake
+  COMMAND ${CMAKE_COMMAND} -E copy ${CATKIN_DEVEL_PREFIX}/share/cmake/pybind11/FindPythonLibsNew.cmake ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake
+  COMMAND ${CMAKE_COMMAND} -E remove_directory ${CATKIN_DEVEL_PREFIX}/share/cmake/pybind11/
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CATKIN_DEVEL_PREFIX}/include/pybind11/ ${CATKIN_DEVEL_PREFIX}/include/pybind11_catkin/pybind11/
   DEPENDEES install
 )
 
+if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
+  # message(WARNING "Compiling for install workspace (${CMAKE_INSTALL_PREFIX})")
+  catkin_package(
+    INCLUDE_DIRS include/pybind11_catkin
+    LIBRARIES ${PYTHON_LIBRARIES}
+    CATKIN_DEPENDS
+    CFG_EXTRAS pybind.cmake
+  )
+else()
+  # message(WARNING "Compiling for devel workspace")
+  file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME})
+  catkin_package(
+    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME} ${EIGEN3_INCLUDE_DIR}
+    LIBRARIES ${PYTHON_LIBRARIES}
+    CFG_EXTRAS pybind.cmake
+  )
+endif()
 
-set(pybind11_INCLUDE_DIRS include)
-
-catkin_package(
-  INCLUDE_DIRS include ${EIGEN3_INCLUDE_DIR}
-  LIBRARIES ${PYTHON_LIBRARIES}
-  CATKIN_DEPENDS
-  CFG_EXTRAS pybind.cmake
-  DEPENDS pybind11
+install(
+  DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-
-install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/share/pybind11/cmake/ DESTINATION share/pybind11/cmake)
-install(FILES ${CATKIN_DEVEL_PREFIX}/share/pybind11/cmake/pybind11Tools.cmake ${CATKIN_DEVEL_PREFIX}/share/pybind11/cmake/FindPythonLibsNew.cmake DESTINATION share/pybind11_catkin/cmake)
-install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/pybind11/ DESTINATION include/pybind11)
-
+install(
+  DIRECTORY ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
