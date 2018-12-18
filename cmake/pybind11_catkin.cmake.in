@@ -15,11 +15,10 @@ set(PYTHON_LIBRARIES ${PYTHON_LIBRARIES} CACHE INTERNAL "")
 
 set(PYTHON_EXECUTABLE ${TEMP_PYTHON_EXECUTABLE} CACHE INTERNAL "")
 
-# Workaround for install workspaces
-include_directories(${pybind11_catkin_INCLUDE_DIRS}/pybind11_catkin)
-
-# Workaround for devel workspaces
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../../../include/pybind11_catkin)
+# This sets the include dirs to be transient, i.e., end-users do not need to
+# explicitly specify pybind11_catkin without polluting the include directories
+# (avoids conflicts).
+set(pybind11_catkin_INCLUDE_DIRS "${pybind11_catkin_INCLUDE_DIRS}/pybind11_catkin")
 
 macro(pybind_add_module target_name other)
     pybind11_add_module(${ARGV})
@@ -31,6 +30,5 @@ macro(pybind_add_module target_name other)
       COMMAND ${CMAKE_COMMAND} -E make_directory ${PYTHON_LIB_DIR}
       COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${target_name}> ${PYTHON_LIB_DIR}/${target_name}.so
       WORKING_DIRECTORY ${CATKIN_DEVEL_PREFIX}
-  COMMENT "Copying library files to python directory" )
-
+  COMMENT "Copying library files to python directory")
 endmacro(pybind_add_module)
