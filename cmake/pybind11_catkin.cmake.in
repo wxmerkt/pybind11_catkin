@@ -15,12 +15,8 @@ set(PYTHON_LIBRARIES ${PYTHON_LIBRARIES} CACHE INTERNAL "")
 
 set(PYTHON_EXECUTABLE ${TEMP_PYTHON_EXECUTABLE} CACHE INTERNAL "")
 
-# This sets the include dirs to be transient, i.e., end-users do not need to
-# explicitly specify pybind11_catkin without polluting the include directories
-# (avoids conflicts).
-set(pybind11_catkin_INCLUDE_DIRS "${pybind11_catkin_INCLUDE_DIRS}/pybind11_catkin")
-
 macro(pybind_add_module target_name other)
+    include_directories(${pybind11_catkin_INCLUDE_DIRS}/pybind11_catkin) # Such that libraries are locally available as pybind11/pybind11, without exporting.
     pybind11_add_module(${ARGV})
     target_link_libraries(${target_name} PRIVATE ${PYTHON_LIBRARIES} ${catkin_LIBRARIES})
     set_target_properties(${target_name} PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${CATKIN_GLOBAL_PYTHON_DESTINATION})
