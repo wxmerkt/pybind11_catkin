@@ -7,18 +7,22 @@ if(DEFINED PYBIND_PYTHON_EXECUTABLE)
     set(PYTHON_EXECUTABLE ${PYBIND_PYTHON_EXECUTABLE} CACHE INTERNAL "")
 endif()
 
+find_package(pybind11 REQUIRED)
+
+if(NOT CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 14)
+endif()
+
 include(pybind11Tools)
+
+# Workaround for faulty pybind11 export: in the binary released version it exports std=c++14 as a library
+set(pybind11_LIBRARIES "")
 
 # Cache variables so pybind11_add_module can be used in parent projects
 set(PYBIND11_INCLUDE_DIR ${PYBIND11_INCLUDE_DIR} CACHE INTERNAL "")
 set(PYTHON_LIBRARIES ${PYTHON_LIBRARIES} CACHE INTERNAL "")
 
 set(PYTHON_EXECUTABLE ${TEMP_PYTHON_EXECUTABLE} CACHE INTERNAL "")
-
-# This sets the include dirs to be transient, i.e., end-users do not need to
-# explicitly specify pybind11_catkin without polluting the include directories
-# (avoids conflicts).
-set(pybind11_catkin_INCLUDE_DIRS "${pybind11_catkin_INCLUDE_DIRS}/pybind11_catkin")
 
 macro(pybind_add_module target_name other)
     pybind11_add_module(${ARGV})

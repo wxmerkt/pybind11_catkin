@@ -3,6 +3,9 @@ project(pybind11_catkin)
 
 find_package(catkin REQUIRED)
 
+# Use system pybind11
+find_package(pybind11 REQUIRED)
+
 catkin_package(
   CFG_EXTRAS pybind11_catkin.cmake
 )
