@@ -6,8 +6,8 @@ find_package(catkin REQUIRED)
 include(ExternalProject)
 
 ExternalProject_Add(pybind11
-  URL "https://github.com/pybind/pybind11/archive/v2.2.3.zip"
-  URL_MD5 "6d9ae6508d0bb0595129dca09ec7738b"
+  URL "https://github.com/pybind/pybind11/archive/v2.2.4.zip"
+  URL_MD5 "06f0bbf25dc9c4fe15092e9e03a8fc01"
 
   UPDATE_COMMAND ""
   PATCH_COMMAND ""
