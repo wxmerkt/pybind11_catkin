@@ -30,7 +30,7 @@ else()
   message(WARNING "Compiling for devel workspace")
   file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME})
   catkin_package(
-    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME} include/${PROJECT_NAME} ${EIGEN3_INCLUDE_DIR}
+    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include ${EIGEN3_INCLUDE_DIR}
     LIBRARIES ${PYTHON_LIBRARIES}
     CFG_EXTRAS pybind11_catkin.cmake
   )
