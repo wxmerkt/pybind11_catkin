@@ -41,5 +41,5 @@ install(
 )
 install(
   FILES ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/FindPythonLibsNew.cmake ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/FindPythonLibsNew.cmake ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/pybind11Tools.cmake
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake
 )
