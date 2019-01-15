@@ -14,7 +14,6 @@ ExternalProject_Add_Step(pybind11_src CopyToDevel
   COMMENT "Copying to devel"
   COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/install/share/cmake/pybind11/pybind11Tools.cmake ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake
   COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_BINARY_DIR}/install/share/cmake/pybind11/FindPythonLibsNew.cmake ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake
-  #COMMAND ${CMAKE_COMMAND} -E remove_directory ${CATKIN_DEVEL_PREFIX}/share/cmake/pybind11/
   COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_BINARY_DIR}/install/include/pybind11/ ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/pybind11/
   DEPENDEES install
 )
@@ -41,6 +40,6 @@ install(
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
 install(
-  DIRECTORY ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/
+  FILES ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/FindPythonLibsNew.cmake ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/FindPythonLibsNew.cmake ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/pybind11Tools.cmake
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
