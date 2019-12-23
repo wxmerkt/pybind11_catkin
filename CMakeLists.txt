@@ -22,15 +22,13 @@ if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
   message(WARNING "Compiling for install workspace (${CMAKE_INSTALL_PREFIX})")
   catkin_package(
     INCLUDE_DIRS include/${PROJECT_NAME}
-    LIBRARIES ${PYTHON_LIBRARIES}
     CFG_EXTRAS pybind11_catkin.cmake
   )
 else()
   message(WARNING "Compiling for devel workspace")
   file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME})
   catkin_package(
-    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include ${EIGEN3_INCLUDE_DIR}
-    LIBRARIES ${PYTHON_LIBRARIES}
+    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
     CFG_EXTRAS pybind11_catkin.cmake
   )
 endif()
