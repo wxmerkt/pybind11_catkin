@@ -18,20 +18,11 @@ ExternalProject_Add_Step(pybind11_src CopyToDevel
   DEPENDEES install
 )
 
-if(IS_DIRECTORY ${CMAKE_INSTALL_PREFIX})
-  message(WARNING "Compiling for install workspace (${CMAKE_INSTALL_PREFIX})")
-  catkin_package(
-    INCLUDE_DIRS include/${PROJECT_NAME}
-    CFG_EXTRAS pybind11_catkin.cmake
-  )
-else()
-  message(WARNING "Compiling for devel workspace")
-  file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME})
-  catkin_package(
-    INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include
-    CFG_EXTRAS pybind11_catkin.cmake
-  )
-endif()
+file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME})
+catkin_package(
+  INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}
+  CFG_EXTRAS pybind11_catkin.cmake
+)
 
 install(
   DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/
