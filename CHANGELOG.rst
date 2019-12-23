@@ -2,8 +2,8 @@
 Changelog for package pybind11_catkin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.4.3 (2019-12-23)
+------------------
 * Clean-up of CMake files and logic (by @rhaschke) - `#11 <https://github.com/ipab-slmc/pybind11_catkin/issues/11>`_
 * Ensure pybind11 uses same python version as catkin
 * Update pybind11 version to 2.4.3
