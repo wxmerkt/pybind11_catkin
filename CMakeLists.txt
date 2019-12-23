@@ -7,7 +7,9 @@ include(ExternalProject)
 ExternalProject_Add(pybind11_src
   URL "https://github.com/pybind/pybind11/archive/v2.4.3.zip"
   UPDATE_COMMAND ""
-  CMAKE_ARGS -DPYBIND11_TEST:BOOL=OFF -DPYBIND11_INSTALL:BOOL=ON -DCMAKE_INSTALL_PREFIX:PATH=${PROJECT_BINARY_DIR}/install
+  CMAKE_ARGS -DPYBIND11_PYTHON_VERSION=${PYTHON_VERSION_STRING}
+             -DPYBIND11_TEST:BOOL=OFF -DPYBIND11_INSTALL:BOOL=ON
+             -DCMAKE_INSTALL_PREFIX:PATH=${PROJECT_BINARY_DIR}/install
 )
 ExternalProject_Add_Step(pybind11_src CopyToDevel
   COMMENT "Copying to devel"

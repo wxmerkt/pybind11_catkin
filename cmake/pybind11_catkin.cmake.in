@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8.3)
 # Configure pybind11 using the cmake file provided by the upstream package.
 # This finds python includes and libs and defines pybind11_add_module()
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+set(PYBIND11_PYTHON_VERSION ${PYTHON_VERSION_STRING})
 include(pybind11Tools)
 
 # set variables used by pybind11_add_module()
