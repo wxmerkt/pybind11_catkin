@@ -2,8 +2,8 @@
 Changelog for package pybind11_catkin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.5.0 (2020-05-24)
+------------------
 * Update to v2.5.0, add compatibility with ROS Noetic (20.04) (`#12 <https://github.com/ipab-slmc/pybind11_catkin/issues/12>`_)
 * Bump CMake version to avoid CMP0048. This breaks support with ROS Indigo (14.04).
 * Contributors: Wolfgang Merkt
