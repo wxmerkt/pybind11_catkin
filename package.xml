@@ -3,7 +3,7 @@
   <name>pybind11_catkin</name>
   <version>2.5.0</version>
   <description>The pybind11 package</description>
-  <maintainer email="wolfgang@robots.ox.ac.uk">Wolfgang Merkt</maintainer>
+  <maintainer email="opensource@wolfgangmerkt.com">Wolfgang Merkt</maintainer>
   <maintainer email="v.ivan@ed.ac.uk">Vladimir Ivan</maintainer>
   <license>BSD</license>
 
