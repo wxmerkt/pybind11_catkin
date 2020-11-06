@@ -15,8 +15,9 @@ ExternalProject_Add(pybind11_src
              -DCMAKE_INSTALL_DATAROOTDIR=${CATKIN_DEVEL_PREFIX}/share
 )
 
+file(MAKE_DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME})
 catkin_package(
-  INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/include
+  INCLUDE_DIRS ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}
   CFG_EXTRAS pybind11_catkin.cmake
 )
 
