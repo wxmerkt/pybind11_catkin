@@ -12,6 +12,7 @@ ExternalProject_Add(pybind11_src
              -DPYBIND11_INSTALL=ON
              -DCMAKE_INSTALL_PREFIX=${PROJECT_BINARY_DIR}/install
              -DCMAKE_INSTALL_INCLUDEDIR=${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}
+  INSTALL_COMMAND DESTDIR="" make install
 )
 # We need to copy the entire content of the cmake/pybind11 folder to the correct place but with a different structure:
 ExternalProject_Add_Step(pybind11_src CopyToDevel
