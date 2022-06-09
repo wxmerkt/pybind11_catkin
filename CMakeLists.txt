@@ -5,7 +5,7 @@ find_package(catkin REQUIRED)
 include(ExternalProject)
 
 ExternalProject_Add(pybind11_src
-  URL "https://github.com/pybind/pybind11/archive/v2.6.1.zip"
+  URL "https://github.com/pybind/pybind11/archive/refs/tags/v2.9.2.zip"
   UPDATE_COMMAND ""
   CMAKE_ARGS -DPYBIND11_NOPYTHON=TRUE
              -DPYBIND11_TEST=OFF
