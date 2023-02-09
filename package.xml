@@ -2,9 +2,10 @@
 <package format="3">
   <name>pybind11_catkin</name>
   <version>2.10.3</version>
-  <description>The pybind11 package</description>
+  <description>A package vendoring recent versions of pybind11 and providing extra macros for easier integration.</description>
   <maintainer email="wolfgang@robots.ox.ac.uk">Wolfgang Merkt</maintainer>
-  <maintainer email="v.ivan@ed.ac.uk">Vladimir Ivan</maintainer>
+  <author>Wolfgang Merkt</author>
+  <author>Vladimir Ivan</author>
   <license>BSD</license>
 
   <buildtool_depend>catkin</buildtool_depend>
