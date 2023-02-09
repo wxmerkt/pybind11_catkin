@@ -2,6 +2,14 @@
 Changelog for package pybind11_catkin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Ignore DESTDIR for the internal ExternalProject_Add() command (`#19 <https://github.com/ipab-slmc/pybind11_catkin/issues/19>`_)
+* Update CI from Travis to GitHub Actions
+* Update pybind11 to version 2.10.3 to support python3.11 (`#21 <https://github.com/ipab-slmc/pybind11_catkin/issues/21>`_)
+* Update pybind to version 2.6.1 (`#13 <https://github.com/ipab-slmc/pybind11_catkin/issues/13>`_)
+* Contributors: Henry Schreiner, Hongzhuo Liang, Johannes Meyer, Wolfgang Merkt
+
 2.5.0 (2020-05-24)
 ------------------
 * Update to v2.5.0, add compatibility with ROS Noetic (20.04) (`#12 <https://github.com/ipab-slmc/pybind11_catkin/issues/12>`_)
