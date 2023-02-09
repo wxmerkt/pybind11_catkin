@@ -2,8 +2,8 @@
 Changelog for package pybind11_catkin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.10.3 (2023-02-09)
+-------------------
 * Ignore DESTDIR for the internal ExternalProject_Add() command (`#19 <https://github.com/ipab-slmc/pybind11_catkin/issues/19>`_)
 * Update CI from Travis to GitHub Actions
 * Update pybind11 to version 2.10.3 to support python3.11 (`#21 <https://github.com/ipab-slmc/pybind11_catkin/issues/21>`_)
