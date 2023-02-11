@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: [melodic, noetic]
+        distro: [noetic]
     env:
       ROS_DISTRO: ${{ matrix.distro }}
       DOWNSTREAM_WORKSPACE: github:arturmiller/pybind11_examples#master
@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        distro: [melodic, noetic]
+        distro: [noetic]
     env:
       ROS_DISTRO: ${{ matrix.distro }}
       PRERELEASE: true
