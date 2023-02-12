@@ -11,15 +11,16 @@ ExternalProject_Add(pybind11_src
              -DPYBIND11_TEST=OFF
              -DPYBIND11_INSTALL=ON
              -DCMAKE_INSTALL_PREFIX=${PROJECT_BINARY_DIR}/install
-             -DCMAKE_INSTALL_INCLUDEDIR=${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}
   # Workaround if DESTDIR is set
   # See https://gitlab.kitware.com/cmake/cmake/-/issues/18165.
   INSTALL_COMMAND ${CMAKE_MAKE_PROGRAM} DESTDIR= install
 )
-# We need to copy the entire content of the cmake/pybind11 folder to the correct place but with a different structure:
+
+# Copy cmake/pybind11 and include/pybind11 to corresponding devel space folders
 ExternalProject_Add_Step(pybind11_src CopyToDevel
   COMMENT "Copying to devel"
-  COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_BINARY_DIR}/install/share/cmake/pybind11/ ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_BINARY_DIR}/install/share/cmake/pybind11 ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake
+  COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_BINARY_DIR}/install/include/pybind11 ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/pybind11
   DEPENDEES install
 )
 
@@ -33,26 +34,7 @@ install(
   DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/${PROJECT_NAME}/
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-
-# We glob the entire _original_ pybind11 cmake directory since there would be a few
-# files in the devel-share directory which we do *not* want to copy as they will be
-# regenerated in the install space:
-#  - pybind11_catkin.cmake
-#  - pybind11_catkinConfig-version.cmake
-#  - pybind11_catkinConfig.cmake
-# file(GLOB PYBIND11_CMAKE_FILES ${PROJECT_BINARY_DIR}/install/share/cmake/pybind11/*.cmake)
-
-set(PYBIND11_CMAKE_FILES
-  ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/FindPythonLibsNew.cmake
-  ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/pybind11Config.cmake
-  ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/pybind11ConfigVersion.cmake
-  ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/pybind11NewTools.cmake
-  ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/pybind11Targets.cmake
-  ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/pybind11Common.cmake
-  ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake/pybind11Tools.cmake
-)
-
 install(
-  FILES ${PYBIND11_CMAKE_FILES}
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/cmake
+  DIRECTORY ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/cmake
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
