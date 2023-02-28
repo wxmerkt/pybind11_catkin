@@ -3,7 +3,9 @@ project(pybind11_catkin)
 
 find_package(catkin REQUIRED)
 
-find_package(pybind11 2.5.0 QUIET)
+set(PYBIND11_MINIMUM_REQUIRED_VERSION 2.5.0)
+
+find_package(pybind11 ${PYBIND11_MINIMUM_REQUIRED_VERSION} QUIET)
 if(NOT pybind11_FOUND)
   include(ExternalProject)
 
