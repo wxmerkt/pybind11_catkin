@@ -4,6 +4,7 @@ project(pybind11_catkin)
 find_package(catkin REQUIRED)
 
 set(PYBIND11_MINIMUM_REQUIRED_VERSION 2.5.0)
+set(PYBIND11_PYTHON_VERSION ${PYTHON_VERSION_STRING})
 
 find_package(pybind11 ${PYBIND11_MINIMUM_REQUIRED_VERSION} QUIET)
 if(NOT pybind11_FOUND)
